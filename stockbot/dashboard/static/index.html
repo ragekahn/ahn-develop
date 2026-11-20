@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>stockbot dashboard</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>stockbot</h1>
+  <div id="status-bar">
+    <span id="broker-label">—</span>
+    <span id="health-dot" class="dot"></span>
+    <span id="last-update">—</span>
+  </div>
+</header>
+
+<main>
+  <!-- symbol selector -->
+  <section id="symbol-bar">
+    <label>Symbol
+      <input id="symbol-input" type="text" placeholder="AAPL" value="AAPL"
+             autocomplete="off" spellcheck="false" />
+    </label>
+    <label>Interval
+      <select id="interval-select">
+        <option value="1d" selected>1d</option>
+        <option value="1wk">1wk</option>
+        <option value="1h">1h</option>
+      </select>
+    </label>
+    <label>SMA short
+      <input id="sma-short" type="number" min="2" max="200" value="20" style="width:4.5rem" />
+    </label>
+    <label>SMA long
+      <input id="sma-long" type="number" min="2" max="500" value="50" style="width:4.5rem" />
+    </label>
+    <button id="refresh-btn">Refresh</button>
+    <span id="market-label" class="market-tag">—</span>
+  </section>
+
+  <!-- price stats -->
+  <section id="stats-row">
+    <div class="stat-card"><span class="label">Close</span><span id="stat-close">—</span></div>
+    <div class="stat-card"><span class="label">Change</span><span id="stat-change">—</span></div>
+    <div class="stat-card"><span class="label">SMA short</span><span id="stat-sma-short">—</span></div>
+    <div class="stat-card"><span class="label">SMA long</span><span id="stat-sma-long">—</span></div>
+  </section>
+
+  <!-- chart -->
+  <section id="chart-section">
+    <canvas id="price-chart"></canvas>
+  </section>
+
+  <!-- account panel -->
+  <section id="account-section">
+    <h2>Account</h2>
+    <div id="account-grid">
+      <div class="stat-card"><span class="label">Cash</span><span id="acct-cash">—</span></div>
+      <div class="stat-card"><span class="label">Equity</span><span id="acct-equity">—</span></div>
+      <div class="stat-card"><span class="label">Positions</span><span id="acct-pos-count">—</span></div>
+    </div>
+    <table id="positions-table">
+      <thead><tr><th>Symbol</th><th>Qty</th><th>Avg Price</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <span id="footer-status">loading…</span>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
